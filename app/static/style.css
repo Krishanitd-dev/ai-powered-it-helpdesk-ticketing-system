@@ -1,0 +1,116 @@
+body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background: linear-gradient(
+        to bottom,
+        #172b3a 0%,
+        #2f5365 45%,
+        #b8c9d1 80%,
+        #eef3f5 100%
+    );
+    min-height: 100vh;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+@media 
+(max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+
+.helpdesk-image {
+    width: 80px;
+    height:80px;
+    object-fit:contain;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.login-container {
+    width: 600px;
+    min-height: 600px;
+    margin: 60px auto;
+    background: white;
+    padding: 60px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+.login-container 
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #02041e;
+}
+
+p { 
+    color: #034978;
+    font-size: 18px;
+}
+
+input,
+select {
+    background: #f4f7f9;
+    color: #1f2933;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #034978;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 30%;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    background: #022961;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;;
+    color: #034978;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+.login-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.login-container button:hover {
+    background: rgb(55, 55, 179);
+
+}
