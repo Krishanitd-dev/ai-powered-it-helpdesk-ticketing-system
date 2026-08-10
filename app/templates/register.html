@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - IT Helpdesk</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <img src="/static/hd.png"
+             alt="IT Helpdesk"
+             class="helpdesk-image">
+
+        <h1>IT HELP DESK</h1>
+
+        <p>Create your account</p>
+
+        {% if error %}
+            <p class="login-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="post" action="/register">
+
+            <label for="email">Email:</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password:</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                required
+            >
+
+            <button type="submit">Create Account</button>
+
+        </form>
+
+        <p class="register-link">
+            Already have an account?
+            <a href="/">Login</a>
+        </p>
+
+    </div>
+
+</body>
+
+</html>

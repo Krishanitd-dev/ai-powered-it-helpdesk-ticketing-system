@@ -39,15 +39,25 @@ later:
 
 
 
-## Technologies
+## Technology stack
 
-- Python
-- FastAPI
-- Uvicorn
-- Jinja2
-- HTML5
-- CSS3
-- JavaScript
-- SQLite
-- Git
-- GitHub
+Backend
+    Python
+    FastAPI
+    SQLite
+
+Frontend
+    HTML5
+    CSS3
+    JavaScript
+    Jinja2
+
+Testing
+    pytest
+    FastAPI TestClient
+
+Development
+    VS Code
+    Git
+    GitHub
+    GitHub Copilot
