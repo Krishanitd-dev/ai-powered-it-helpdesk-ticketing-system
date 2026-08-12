@@ -1,3 +1,5 @@
+from datetime import datetime
+from app.auth import secure_hash
 import sqlite3
 
 DATABASE = "userdata.db"
@@ -12,19 +14,20 @@ def create_user_table():
         CREATE TABLE IF NOT EXISTS userdata (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
+            password_hash TEXT NOT NULL,
+            created_at TEXT NOT NULL
         )
     """)
     conn.commit()
     conn.close()
 
-def create_user(email, password):
+def create_user(email, password_hash, created_at):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO userdata (email, password)
-        VALUES (?, ?)
-        """, (email, password))
+        INSERT INTO userdata (email, password_hash, created_at)
+        VALUES (?, ?, ?)
+        """, (email, password_hash, created_at))
     conn.commit()
     conn.close()
     
@@ -33,7 +36,7 @@ def get_user(email):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT id, email, password
+        SELECT id, email, password_hash, created_at
         FROM userdata 
         WHERE email = ?
         """, (email,))
@@ -44,10 +47,12 @@ def get_user(email):
 def create_test_user():
     conn = get_connection()
     cursor = conn.cursor()
+    password_hash = secure_hash("user123")
+    created_at = datetime.now().isoformat()
     cursor.execute("""
-        INSERT OR IGNORE INTO userdata (email, password)
-        VALUES (?, ?)
-        """, ("user1@test.com", "user123")
+        INSERT OR IGNORE INTO userdata (email, password_hash, created_at)
+        VALUES (?, ?, ?)
+        """, ("user1@test.com", password_hash, created_at)
     )
     conn.commit()
     conn.close()
