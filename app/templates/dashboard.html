@@ -7,32 +7,57 @@
 
     <title>IT Helpdesk - Dashboard</title>
 
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
-<body>
-
-    <nav class="navbar">
-
-        <div class="logo">
-            IT Helpdesk
-        </div>
-
-        <div class="nav-links">
-            <a href="/dashboard">Dashboard</a>
-            <a href="/tickets">Tickets</a>
-            <a href="/profile">Profile</a>
-            <a href="/logout">Logout</a>
-        </div>
-
-    </nav>
-
-    <main>
+<body class="dashboard-page">
+    {% include "navbar.html" %}
+    <main class="dashboard-container">
+        
+    <section class="welcome-section">
         <h1>Dashboard</h1>
-
         <p>Welcome to the IT Helpdesk.</p>
+        <p>
+            Welcome back, {{ email }}.
+            Manage your IT support requests from your dashboard.
+        </p>
+    </section>
+
+    <section class="dashboard-cards">
+        <div class="dashboard-card">
+        <h3>Open Tickets</h3>
+        <p class="card-number">0</p>
+        </div>
+        
+        <div class="dashboard-card">
+        <h3>In Progress</h3>
+        <p class="card-number">0</p>
+        </div>
+
+        <div class="dashboard-card">
+        <h3>Closed Tickets</h3>
+        <p class="card-number">0</p>
+        </div>
+    </section>
+
+
+    <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <a href="/tickets" class="dashboard-button">
+                + Create New Ticket
+        </a>
+    </section>
+
+    <section class="recent-tickets">
+        <h2>Recent Tickets</h2>
+        <div class="empty-tickets">
+            <p>You don't have any support tickets yet.</p>
+            <a href="/tickets">
+                 Create your first ticket
+            </a>
+
+        </div>
+    </section>
     </main>
-
 </body>
-
 </html>
