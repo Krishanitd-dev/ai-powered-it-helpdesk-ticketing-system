@@ -3,7 +3,7 @@
 
 
 # IT Helpdesk System
-A full-stack IT Helpdesk System built with Python and FastAPI.
+An AI-powered full-stack IT Helpdesk Ticketing System built with Python and FastAPI, featuring AI-assisted ticket classification, priority suggestions, and professional response generation.
 
 Users (Two types)
 Employee
@@ -17,6 +17,7 @@ View own tickets
 View ticket details
 Add comments
 Close their ticket
+Receive AI-assisted ticket classification and priority suggestions
 
 Support Staff can:
 Log in
@@ -26,7 +27,8 @@ Change ticket status
 Change priority
 Assign tickets
 Add resolution notes
-
+Generate AI-assisted response suggestions 
+Generate AI ticket summaries
 
 ## installation
 python -m venv venv
@@ -49,9 +51,11 @@ Backend
     Python
     FastAPI
     SQLite
+    Open AI API
 
 Frontend
     HTML5
+    React
     CSS3
     JavaScript
     Jinja2
@@ -80,6 +84,8 @@ Logout
 Login error message
 Register link
 User account checking
+AI Ticket Classification 
+AI Suggested Response
 
 
 ## Registration Validation
