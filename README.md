@@ -2,7 +2,7 @@
 🚧 Currently under development.  
 
 
-# IT Helpdesk System
+# AI-Powered IT Helpdesk System
 An AI-powered full-stack IT Helpdesk Ticketing System built with Python and FastAPI, featuring AI-assisted ticket classification, priority suggestions, and professional response generation.
 
 Users (Two types)
