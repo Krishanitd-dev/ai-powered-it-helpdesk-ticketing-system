@@ -2,7 +2,11 @@
 🚧 Currently under development.  
 
 
+<<<<<<< HEAD
+# # AI-Powered IT Helpdesk System
+=======
 # AI-Powered IT Helpdesk System
+>>>>>>> fbbc082432bbb73181919b2b326513d333eba811
 An AI-powered full-stack IT Helpdesk Ticketing System built with Python and FastAPI, featuring AI-assisted ticket classification, priority suggestions, and professional response generation.
 
 Users (Two types)
@@ -27,9 +31,8 @@ Change ticket status
 Change priority
 Assign tickets
 Add resolution notes
-Generate AI-assisted response suggestions
+Generate AI-assisted response suggestions 
 Generate AI ticket summaries
-
 
 ## installation
 python -m venv venv
@@ -52,9 +55,11 @@ Backend
     Python
     FastAPI
     SQLite
+    Open AI API
 
 Frontend
     HTML5
+    React
     CSS3
     JavaScript
     Jinja2
@@ -83,8 +88,9 @@ Logout
 Login error message
 Register link
 User account checking
-AI Ticket Classification
+AI Ticket Classification 
 AI Suggested Response
+
 
 ## Registration Validation
 Email is required and validated.
@@ -99,3 +105,10 @@ User ID and email are stored in the session after login.
 Server uses the session to identify the logged-in user.
 Users without a valid session are redirected to the login page.
 Logout clears the session.
+<<<<<<< HEAD
+
+Login page 
+![alt text](image.png)
+![alt text](image-1.png)
+=======
+>>>>>>> fbbc082432bbb73181919b2b326513d333eba811
