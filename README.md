@@ -2,7 +2,7 @@
 🚧 Currently under development.  
 
 
-# IT Helpdesk System
+# # AI-Powered IT Helpdesk System
 An AI-powered full-stack IT Helpdesk Ticketing System built with Python and FastAPI, featuring AI-assisted ticket classification, priority suggestions, and professional response generation.
 
 Users (Two types)
@@ -101,3 +101,7 @@ User ID and email are stored in the session after login.
 Server uses the session to identify the logged-in user.
 Users without a valid session are redirected to the login page.
 Logout clears the session.
+
+Login page 
+![alt text](image.png)
+![alt text](image-1.png)
