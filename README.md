@@ -15,6 +15,7 @@ Employees can:
 Register and log in
 View their dashboard
 Create support tickets
+Manage ticket priority
 View their own tickets
 View ticket details
 View support responses
@@ -29,7 +30,6 @@ View all customer tickets
 View individual ticket details
 Respond to customer tickets
 Update ticket status
-Manage ticket priority
 Assign tickets
 Add resolution notes
 
