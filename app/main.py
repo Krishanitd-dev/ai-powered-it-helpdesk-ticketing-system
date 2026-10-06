@@ -7,9 +7,11 @@ from starlette.middleware.sessions import SessionMiddleware
 from datetime import datetime
 from app.auth import secure_hash, verify_password
 from pydantic import EmailStr
+from app.api import api_router
 
 
 app = FastAPI()
+app.include_router(api_router)
 
 app.add_middleware(
     SessionMiddleware,
@@ -398,7 +400,7 @@ async def helpdesk_dashboard(request: Request):
 
     tickets = get_all_tickets()
 
-    # Count tickets by status
+ 
     conn = get_connection()
     cursor = conn.cursor()
 

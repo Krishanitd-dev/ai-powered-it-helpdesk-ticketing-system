@@ -108,7 +108,7 @@ Backend-
 Python
 FastAPI
 PostgreSQL
-Jinja2
+
 Session Middleware
 
 Frontend -
@@ -140,7 +140,21 @@ pip install "psycopg[binary]"
 pip install itsdangerous
 
 ## Run
+.\venv\Scripts\activate
 python -m uvicorn app.main:app --reload
+
+## Test Login
+Admin 
+email: admin@helpdesk.com
+password: Admin123
+
+User 
+user10@test.com
+User@123
+
+FastAPI
+uvicorn app.main:app --reload
+http://127.0.0.1:8000/docs
 
 ## Security & Validation
 
