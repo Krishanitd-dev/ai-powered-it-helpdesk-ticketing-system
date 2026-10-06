@@ -152,7 +152,7 @@ User
 user10@test.com
 User@123
 
-FastAPI
+REST API
 uvicorn app.main:app --reload
 http://127.0.0.1:8000/docs
 
