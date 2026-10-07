@@ -127,6 +127,16 @@ GitHub Copilot
 Deployment -
 Vercel
 
+security tests  Authentication → Pydantic validation → CRUD → PATCH → ticket responses → Swagger testing
+### API Design
+
+- RESTful API endpoints built with FastAPI
+- Pydantic request models for input validation
+- Pydantic response models for consistent API responses
+- HTTP status codes for success and error handling
+- Automatic Swagger/OpenAPI documentation
+
+preventing one employee from accessing another employee's ticket.
 
 ## installation
 python -m venv venv
