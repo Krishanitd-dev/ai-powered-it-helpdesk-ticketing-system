@@ -2,6 +2,7 @@ from fastapi import APIRouter, Request, HTTPException, status
 from app.database import get_connection
 from pydantic import BaseModel, Field 
 from datetime import datetime
+from typing import Literal
 
 api_router = APIRouter(prefix="/api")
 class TicketCreate(BaseModel):
@@ -10,10 +11,11 @@ class TicketCreate(BaseModel):
     priority: str = Field(min_length=1, max_length=20)
     description: str = Field(min_length=1, max_length=300)
 
+
+
 class TicketUpdate(BaseModel):
-    
-    status: str | None = None
-    priority: str | None = None
+    status: Literal["Open", "In Progress", "Closed"] | None = None
+    priority: Literal["Low", "Medium", "High"] | None = None
    
 class TicketResponse(BaseModel):
     id: int
@@ -33,22 +35,45 @@ class TicketUpdateResponse(BaseModel):
     id: int
     subject: str
     category: str
-    priority: str
-    status: str
+    priority: str | None = Field(
+        default=None,
+        min_length=1,
+        max_length=20
+    )
+    status: str | None = Field(default=None,
+        min_length=1,
+        max_length=20
+    )
     created_at: datetime | None = None
 
 class ResponseCreate(BaseModel):
     content: str = Field(min_length=1, max_length=500)
 
 
+
+def require_user(request: Request):
+    if "user_id" not in request.session:
+        raise HTTPException(
+            status_code=401,
+            detail="Authentication required"
+        )
+
+    return request.session["user_id"]
+
+def require_helpdesk(request: Request):
+    if "helpdesk_id" not in request.session:
+        raise HTTPException(
+            status_code=401,
+            detail="Support staff authentication required"
+        )
+
+    return request.session["helpdesk_id"]
+
 @api_router.get("/tickets",
                 response_model=list[TicketResponse])
 async def get_my_tickets(request: Request):
 
-    if "user_id" not in request.session:
-        return {"error": "Not authenticated"}
-
-    user_id = request.session["user_id"]
+    user_id = require_user(request)
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -82,6 +107,46 @@ async def get_my_tickets(request: Request):
             }
             for ticket in tickets
         ]
+
+@api_router.get(
+    "/tickets/{ticket_id}",
+    response_model=TicketResponse
+)
+def get_ticket(ticket_id: int, request: Request):
+
+    user_id = require_user(request)
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT id, subject, category, priority, status, created_at
+        FROM tickets
+        WHERE id = %s AND user_id = %s
+        """,
+        (ticket_id, user_id)
+    )
+
+    ticket = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if not ticket:
+        raise HTTPException(
+            status_code=404,
+            detail="Ticket not found"
+        )
+
+    return {
+        "id": ticket[0],
+        "subject": ticket[1],
+        "category": ticket[2],
+        "priority": ticket[3],
+        "status": ticket[4],
+        "created_at": ticket[5]
+    }
     
 
 @api_router.post("/tickets", response_model=TicketResponse,
@@ -90,13 +155,7 @@ async def create_ticket_api(
     request: Request,
     ticket: TicketCreate
 ):
-    if "user_id" not in request.session:
-        raise HTTPException(
-            status_code=401,
-            detail="Authentication required"
-        )
-
-    user_id = request.session["user_id"]
+    user_id = require_user(request)
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -110,7 +169,7 @@ async def create_ticket_api(
             description
         )
         VALUES (%s, %s, %s, %s, %s)
-        RETURNING id, subject, category, priority, status, created_at, description
+        RETURNING id, subject, category, priority, status, created_at
     """, (
         user_id,
         ticket.subject,
@@ -132,8 +191,8 @@ async def create_ticket_api(
         "category": new_ticket[2],
         "priority": new_ticket[3],
         "status": new_ticket[4],
-        "created_at": new_ticket[5],
-        "description": new_ticket[6]
+        "created_at": new_ticket[5]
+       
     }
 
 @api_router.patch("/tickets/{ticket_id}",  response_model=TicketUpdateResponse)
@@ -142,11 +201,7 @@ async def update_ticket_api(
     ticket_id: int,
     ticket: TicketUpdate
 ):
-    if "helpdesk_id" not in request.session:
-        raise HTTPException(
-            status_code=401,
-            detail="Support staff authentication required"
-        )
+    require_helpdesk(request)
 
     if ticket.status is None and ticket.priority is None:
         raise HTTPException(
@@ -218,13 +273,7 @@ async def delete_ticket_api(
     request: Request,
     ticket_id: int
 ):
-    if "user_id" not in request.session:
-        raise HTTPException(
-            status_code=401,
-            detail="Authentication required"
-        )
-
-    user_id = request.session["user_id"]
+    user_id = require_user(request)
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -262,14 +311,7 @@ async def get_ticket_responses(
     request: Request,
     ticket_id: int
 ):
-    if "user_id" not in request.session:
-        raise HTTPException(
-            status_code=401,
-            detail="Authentication required"
-        )
-
-    user_id = request.session["user_id"]
-
+    user_id = require_user(request)
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -310,11 +352,7 @@ async def create_ticket_response(
     ticket_id: int,
     response: ResponseCreate
 ):
-    if "helpdesk_id" not in request.session:
-        raise HTTPException(
-            status_code=401,
-            detail="Support staff authentication required"
-        )
+    require_helpdesk(request)
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -362,6 +400,6 @@ async def create_ticket_response(
 
     return {
         "ticket_id": updated_ticket[0],
-        "content": updated_ticket[1],
-        "status": updated_ticket[2]
+        "content": updated_ticket[1]
+       
     }
