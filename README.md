@@ -1,7 +1,7 @@
 
 ## IT Helpdesk Ticket Management System
 
-A full-stack IT Helpdesk Ticket Management System developed using Python, FastAPI, PostgreSQL, HTML, CSS, and JavaScript.
+A full-stack IT Helpdesk Ticket Management System developed using Python, FastAPI, RESTful API, PostgreSQL, HTML, CSS, and JavaScript.
 
 The system provides separate functionality for Employees and Support Staff, allowing employees to submit and track IT support requests while support staff can manage, update, and respond to tickets.
 
@@ -75,9 +75,15 @@ Tickets can move through the following workflow:
 
 Open > In Progress > Closed
 
+## REST API & Authentication
+RESTful ticket APIs using FastAPI
+Session-based authentication
+Separate access control for users and helpdesk staff
+Pydantic request and response validation
+Ticket ownership checks and error handling (400, 401, 404, 422)
+Swagger/OpenAPI documentation and API testing
 
 ## System Workflow
-
 #### Employee Workflow
 Employee registers for an account.
 Employee logs in.
@@ -127,16 +133,6 @@ GitHub Copilot
 Deployment -
 Vercel
 
-security tests  Authentication → Pydantic validation → CRUD → PATCH → ticket responses → Swagger testing
-### API Design
-
-- RESTful API endpoints built with FastAPI
-- Pydantic request models for input validation
-- Pydantic response models for consistent API responses
-- HTTP status codes for success and error handling
-- Automatic Swagger/OpenAPI documentation
-
-preventing one employee from accessing another employee's ticket.
 
 ## installation
 python -m venv venv
